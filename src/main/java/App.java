@@ -1,6 +1,17 @@
+import beans.Client;
+import beans.ConsoleEventLogger;
+
 public class App {
     Client client;
     ConsoleEventLogger eventLogger;
+
+    public App(Client client, ConsoleEventLogger eventLogger) {
+        this.client = client;
+        this.eventLogger = eventLogger;
+    }
+
+    public App() {
+    }
 
     public static void main(String[] args) {
         App app = new App();

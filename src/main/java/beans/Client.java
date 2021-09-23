@@ -1,3 +1,5 @@
+package beans;
+
 public class Client {
     private String id;
     private String fullName;
@@ -5,6 +7,9 @@ public class Client {
     public Client(String id, String fullName) {
         this.id = id;
         this.fullName = fullName;
+    }
+
+    public Client() {
     }
 
     public String getId() {
