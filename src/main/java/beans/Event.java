@@ -12,14 +12,26 @@ public class Event {
     private Date date;
     private DateFormat dateFormat;
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
     public Event(Date date, DateFormat df) {
         this.id = AUTO_ID.getAndIncrement();
         this.date = date;
         this.dateFormat = df;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     @Override

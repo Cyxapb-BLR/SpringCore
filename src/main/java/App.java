@@ -1,14 +1,15 @@
 import beans.Client;
 import beans.Event;
 import loggers.ConsoleEventLogger;
+import loggers.EventLogger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
     Client client;
-    ConsoleEventLogger eventLogger;
+    EventLogger eventLogger;
 
-    public App(Client client, ConsoleEventLogger eventLogger) {
+    public App(Client client, EventLogger eventLogger) {
         this.client = client;
         this.eventLogger = eventLogger;
     }
