@@ -3,15 +3,30 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<!--    создаем бин со след параметрами конструктора:-->
     <bean id="client" class="beans.Client">
         <constructor-arg value="1"/>
         <constructor-arg value="John Smith"/>
     </bean>
 
-    <bean id="eventLogger" class="beans.ConsoleEventLogger"/>
+    <bean id="eventLogger" class="loggers.ConsoleEventLogger"/>
 
+<!--    создаем бин Арр и добавляем ему зависимость с бинами client и eventLogger:-->
     <bean id="app" class="App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
+    </bean>
+
+    <!--создаем бин Event с параметрами конструктора, в которых создаются другие бины.
+    scope="prototype" - означает, что при вызове бина будет всегда создаваться новый бин,
+    следовательно и внутренние бины будут создаваться каждый раз новые-->
+    <bean id="event" class="beans.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+        <constructor-arg>
+            <bean id="dateFormat" class="java.text.DateFormat"
+                  factory-method="getDateTimeInstance"/>
+        </constructor-arg>
     </bean>
 </beans>
