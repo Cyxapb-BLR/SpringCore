@@ -1,4 +1,4 @@
-package beans;
+package com.yet.spring.core.beans;
 
 import java.text.DateFormat;
 import java.util.Date;

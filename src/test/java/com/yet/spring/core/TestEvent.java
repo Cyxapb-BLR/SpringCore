@@ -1,4 +1,6 @@
-import beans.Event;
+package com.yet.spring.core;
+
+import com.yet.spring.core.beans.Event;
 import org.junit.Assert;
 import org.junit.Test;
 
