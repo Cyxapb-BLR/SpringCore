@@ -2,17 +2,23 @@ package com.yet.spring.core;
 
 import com.yet.spring.core.beans.Client;
 import com.yet.spring.core.beans.Event;
+import com.yet.spring.core.beans.EventType;
 import com.yet.spring.core.loggers.EventLogger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class App {
-    Client client;
-    EventLogger eventLogger;
+import java.util.Map;
 
-    public App(Client client, EventLogger eventLogger) {
+public class App {
+    private Client client;
+    private EventLogger defaultLogger;
+    private Map<EventType, EventLogger> loggers;
+
+    public App(Client client, EventLogger eventLogger, Map<EventType, EventLogger> loggers) {
+        super();
         this.client = client;
-        this.eventLogger = eventLogger;
+        this.defaultLogger = eventLogger;
+        this.loggers = loggers;
     }
 
     public App() {
@@ -32,18 +38,27 @@ public class App {
 //        com.yet.spring.core.App app = context.getBean(com.yet.spring.core.App.class);
 
         Event event = context.getBean(Event.class);
-        app.logEvent(event, "Some event for user 1");
+        app.logEvent(EventType.INFO, event, "Some event for 1");
 
         event = context.getBean(Event.class);
-        app.logEvent(event, "Some event for user 2");
+        app.logEvent(EventType.ERROR, event, "Some event for 2");
+
+        event = context.getBean(Event.class);
+        app.logEvent(null, event, "Some event for 3");
 
         context.close();
 
     }
 
-    private void logEvent(Event event, String msg) {
+    private void logEvent(EventType eventType, Event event, String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
-        eventLogger.logEvent(event);
+
+        EventLogger logger = loggers.get(eventType);
+
+        if (logger == null) {
+            logger = defaultLogger;
+        }
+        logger.logEvent(event);
     }
 }

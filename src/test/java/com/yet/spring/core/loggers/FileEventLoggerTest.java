@@ -42,13 +42,13 @@ public class FileEventLoggerTest {
     }
 
     @Test
-    public void testInit() {
+    public void testInit() throws IOException {
         FileEventLogger logger = new FileEventLogger(file.getAbsolutePath());
         logger.init();
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testInitFail() {
+    public void testInitFail() throws IOException {
         file.setReadOnly();
         FileEventLogger logger = new FileEventLogger(file.getAbsolutePath());
         logger.init();

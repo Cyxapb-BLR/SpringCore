@@ -7,6 +7,7 @@
     <bean id="client" class="com.yet.spring.core.beans.Client">
         <constructor-arg value="1"/>
         <constructor-arg value="John Smith"/>
+        <property name="greeting" value="Hello there!"/>
     </bean>
 
     <import resource="loggers.xml"/>    <!--импорт бинов из отдельного файла-->
@@ -14,7 +15,15 @@
     <!--    создаем бин Арр и добавляем ему зависимость с бинами client и eventLogger:-->
     <bean id="app" class="com.yet.spring.core.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="cacheFileEventLogger"/>
+        <constructor-arg>
+            <map>
+                <entry key="INFO"
+                       value-ref="consoleEventLogger"/>
+                <entry key="ERROR"
+                       value-ref="combinedEventLogger"/>
+            </map>
+        </constructor-arg>
     </bean>
 
     <!--создаем бин Event с параметрами конструктора, в которых создаются другие бины.

@@ -3,6 +3,11 @@ package com.yet.spring.core.beans;
 public class Client {
     private String id;
     private String fullName;
+    private  String greeting;
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
+    }
 
     public Client(String id, String fullName) {
         this.id = id;
