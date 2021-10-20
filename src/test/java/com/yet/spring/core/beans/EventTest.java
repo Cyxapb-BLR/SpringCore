@@ -1,13 +1,12 @@
-package com.yet.spring.core;
+package com.yet.spring.core.beans;
 
-import com.yet.spring.core.beans.Event;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.text.DateFormat;
 import java.util.Date;
 
-public class TestEvent {
+public class EventTest {
 
     @Test
     public void testToString() {

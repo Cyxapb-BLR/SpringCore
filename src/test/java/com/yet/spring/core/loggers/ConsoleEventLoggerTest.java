@@ -1,7 +1,6 @@
-package com.yet.spring.core;
+package com.yet.spring.core.loggers;
 
 import com.yet.spring.core.beans.Event;
-import com.yet.spring.core.loggers.ConsoleEventLogger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,7 +11,7 @@ import java.io.PrintStream;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class TestConsoleEventLogger {
+public class ConsoleEventLoggerTest {
 
     private static final String MSG = "Message";
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
