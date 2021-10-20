@@ -9,7 +9,7 @@
         <constructor-arg value="John Smith"/>
     </bean>
 
-    <bean id="eventLogger" class="com.yet.spring.core.loggers.ConsoleEventLogger"/>
+    <import resource="loggers.xml"/>    <!--импорт бинов из отдельного файла-->
 
     <!--    создаем бин Арр и добавляем ему зависимость с бинами client и eventLogger:-->
     <bean id="app" class="com.yet.spring.core.App">
@@ -24,19 +24,9 @@
         <constructor-arg>
             <bean class="java.util.Date"/>
         </constructor-arg>
-        <constructor-arg>
-            <bean id="dateFormat" class="java.text.DateFormat"
-                  factory-method="getDateTimeInstance"/>
-        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
     </bean>
 
-    <bean id="fileEventLogger" class="com.yet.spring.core.loggers.FileEventLogger"
-          init-method="init">
-        <constructor-arg value="e:\log-result.txt"/>
-    </bean>
-    <bean id="cacheFileEventLogger" class="com.yet.spring.core.loggers.CacheFileEventLogger"
-          destroy-method="destroy">
-        <constructor-arg index="0" value="e:\log-result.txt"/>
-        <constructor-arg index="1" value="5"/>
-    </bean>
+    <bean id="dateFormat" class="java.text.DateFormat"
+          factory-method="getDateTimeInstance"/>
 </beans>
